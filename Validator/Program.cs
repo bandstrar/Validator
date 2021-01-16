@@ -26,8 +26,46 @@ namespace Validator
             }
             bool validPin = pinCode.Length >= 4 && pinCode.Length <= 8 && onlyDigits == true;
 
+            if (validPin == true)
+            {
+                Console.WriteLine("Your PIN number is valid");
+            }
+            else
+            {
+                Console.WriteLine("Your PIN number is invalid");
+            }
+            
 
-            Console.WriteLine(validPin);
+            Console.WriteLine("Please enter a valid phone number");
+            string userPhone = Console.ReadLine();
+            string onlyPhoneDigits = userPhone.Replace(" ", "").Replace("(", "").Replace(")", "").Replace("-", "");
+            
+            bool phoneDigits = true;
+
+            while (true)
+            {
+                foreach (var digit in onlyPhoneDigits)
+                if (Char.IsDigit(digit))
+                    {
+                        phoneDigits = true;
+                    }
+                else
+                    {
+                        phoneDigits = false;
+                        break;
+                    }
+                break;
+            }
+            bool validPhone = onlyPhoneDigits.Length == 10 && phoneDigits == true;
+
+            if (validPhone == true)
+            {
+                Console.WriteLine("Your phone number is valid");
+            }
+            else
+            {
+                Console.WriteLine("Your phone number is invalid");
+            }
         }
     }
 }
