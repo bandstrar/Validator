@@ -66,6 +66,68 @@ namespace Validator
             {
                 Console.WriteLine("Your phone number is invalid");
             }
+
+            Console.WriteLine("Please enter a valid e-mail address");
+            string userEmail = Console.ReadLine();
+
+            bool containsAt = userEmail.Contains("@");
+            bool containsPeriod = userEmail.Contains(".");
+            bool atBeforePeriod = false;
+            bool username = false;
+            bool domain = false;
+            bool topDomain = false;
+
+            if (containsAt == true && containsPeriod == true)
+            {
+                int atIndex = userEmail.IndexOf("@");
+                int periodIndex = userEmail.LastIndexOf(".");
+                if (atIndex < periodIndex)
+                {
+                    atBeforePeriod = true;
+                }
+            }
+
+            if (atBeforePeriod == true)
+            {
+                bool notAt = !userEmail.StartsWith("@");
+
+                if (notAt == true)
+                {
+                    username = true;
+                }
+
+            }
+
+            if (username == true)
+            {
+                int atIndex = userEmail.IndexOf("@");
+                string validDomain = userEmail.Substring(atIndex + 1, 1);
+
+                if (validDomain != ".")
+                {
+                    domain = true;
+                }
+            }
+
+            if (domain == true)
+            {
+                int periodIndex = userEmail.LastIndexOf(".");
+                string validTopDomain = userEmail.Substring(periodIndex);
+
+                if (validTopDomain != ".")
+                {
+                    topDomain = true;
+                }
+            }
+
+            if (topDomain == true)
+            {
+                Console.WriteLine("Your email address is valid");
+            }
+            else
+            {
+                Console.WriteLine("Your email address is invalid");
+            }
         }
     }
 }
